@@ -6,5 +6,6 @@ data class BerlinClockValues(
     val hoursFirstRowCount: Int,
     val hoursSecondRowCount: Int,
     val minutesFirstRowCount: Int,
-    val minutesSecondRowCount: Int
+    val minutesSecondRowCount: Int,
+    val time: String
 )
