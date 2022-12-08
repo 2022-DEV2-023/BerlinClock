@@ -1,6 +1,5 @@
 package example.com.berlinClock.converter
 
-import example.com.berlinClock.models.BerlinClockValues
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.util.*
@@ -36,6 +35,13 @@ class BerlinClockConverterTest {
     }
 
     @Test
+    fun `returns 1 for first row of hours when hours is equal to 6`() {
+        val actual = calculateBerlinClockFor(hours = 6)
+
+        assertEquals(1, actual.hoursFirstRowCount)
+    }
+
+    @Test
     fun `returns 0 for second row of hours when remainder of division by 5 is equal to 0`() {
         val actualWhenZero = calculateBerlinClockFor(hours = 0)
 
@@ -62,6 +68,20 @@ class BerlinClockConverterTest {
         val actual = calculateBerlinClockFor(minutes = 0)
 
         assertEquals(0, actual.minutesFirstRowCount)
+    }
+
+    @Test
+    fun `returns 4 for first row of minutes when minutes is equal to 20`() {
+        val actual = calculateBerlinClockFor(minutes = 20)
+
+        assertEquals(4, actual.minutesFirstRowCount)
+    }
+
+    @Test
+    fun `returns 4 for first row of minutes when minutes is equal to 21`() {
+        val actual = calculateBerlinClockFor(minutes = 21)
+
+        assertEquals(4, actual.minutesFirstRowCount)
     }
 
     private fun calculateBerlinClockFor(hours: Int = 0, minutes: Int = 0, seconds: Int = 0) =
