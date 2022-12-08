@@ -1,12 +1,13 @@
 package example.com.berlinClock.converter
 
-import example.com.berlinClock.models.BerlinClockValues
+import java.util.*
 
 
 class BerlinClockConverter {
     companion object {
-        fun convertToBerlinClock(): Boolean {
-            return true
+        fun convertToBerlinClock(date: GregorianCalendar): Boolean {
+            val seconds = date.get(Calendar.SECOND)
+            return seconds % 2 == 0
         }
     }
 }
