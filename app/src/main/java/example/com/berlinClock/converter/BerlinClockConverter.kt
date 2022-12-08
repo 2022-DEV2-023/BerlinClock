@@ -15,7 +15,8 @@ class BerlinClockConverter {
                 secondsIndicatorOn = seconds % 2 == 0,
                 hoursFirstRowCount = hours.floorDiv(5),
                 hoursSecondRowCount = hours % 5,
-                minutesFirstRowCount = minutes.floorDiv(5)
+                minutesFirstRowCount = minutes.floorDiv(5),
+                minutesSecondRowCount = 0
             )
         }
     }
