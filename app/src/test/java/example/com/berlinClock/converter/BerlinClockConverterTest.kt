@@ -120,6 +120,13 @@ class BerlinClockConverterTest {
         assertEquals("12:33", actual.time)
     }
 
+    @Test
+    fun `returns current time when time = 09h03`() {
+        val actual = calculateBerlinClockFor(hours = 9, minutes = 3)
+
+        assertEquals("09:03", actual.time)
+    }
+
     private fun calculateBerlinClockFor(hours: Int = 0, minutes: Int = 0, seconds: Int = 0) =
         BerlinClockConverter.convertToBerlinClock(
             GregorianCalendar(

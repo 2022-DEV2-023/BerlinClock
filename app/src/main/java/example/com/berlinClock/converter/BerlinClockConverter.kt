@@ -17,8 +17,15 @@ class BerlinClockConverter {
                 hoursSecondRowCount = hours % 5,
                 minutesFirstRowCount = minutes.floorDiv(5),
                 minutesSecondRowCount = minutes % 5,
-                time = "${hours}:${minutes}"
+                time = "${formattedString(hours)}:${formattedString(minutes)}"
             )
+
+        }
+
+        private fun formattedString(s: Int) = if (s <= 9) {
+            "0$s"
+        } else {
+            "$s"
         }
     }
 }
