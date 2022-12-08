@@ -22,14 +22,20 @@ class BerlinClockConverterTest {
     }
 
     @Test
-    fun `returns 0 for first row of hours when hours is equal to 0`(){
+    fun `returns 0 for first row of hours when hours is equal to 0`() {
         val actual = calculateBerlinClockFor(hours = 0)
 
         assertEquals(0, actual.hoursFirstRowCount)
-
     }
 
-    private fun calculateBerlinClockFor(hours:Int=0, seconds: Int=0): BerlinClockValues =
+    @Test
+    fun `returns 1 for first row of hours when hours is equal to 5`() {
+        val actual = calculateBerlinClockFor(hours = 5)
+
+        assertEquals(1, actual.hoursFirstRowCount)
+    }
+
+    private fun calculateBerlinClockFor(hours: Int = 0, seconds: Int = 0): BerlinClockValues =
         BerlinClockConverter.convertToBerlinClock(
             GregorianCalendar(
                 2022,
