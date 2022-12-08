@@ -108,9 +108,9 @@ class BerlinClockConverterTest {
 
     @Test
     fun `returns current time`() {
-        val actualWhenFiftyFour = calculateBerlinClockFor(hours = 20, minutes = 35)
+        val actual = calculateBerlinClockFor(hours = 20, minutes = 35)
 
-        assertEquals("20:35", actualWhenFiftyFour.time)
+        assertEquals("20:35", actual.time)
     }
 
     private fun calculateBerlinClockFor(hours: Int = 0, minutes: Int = 0, seconds: Int = 0) =
