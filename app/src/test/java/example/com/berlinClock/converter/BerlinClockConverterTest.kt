@@ -35,6 +35,13 @@ class BerlinClockConverterTest {
         assertEquals(1, actual.hoursFirstRowCount)
     }
 
+    @Test
+    fun `returns 0 for second row of hours when remainder of division by 5 is equal to 0`() {
+        val actual = calculateBerlinClockFor(hours = 0)
+
+        assertEquals(0, actual.hoursSecondRowCount)
+    }
+
     private fun calculateBerlinClockFor(hours: Int = 0, seconds: Int = 0): BerlinClockValues =
         BerlinClockConverter.convertToBerlinClock(
             GregorianCalendar(
