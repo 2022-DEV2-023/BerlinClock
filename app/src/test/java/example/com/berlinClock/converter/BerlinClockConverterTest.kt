@@ -37,26 +37,41 @@ class BerlinClockConverterTest {
 
     @Test
     fun `returns 0 for second row of hours when remainder of division by 5 is equal to 0`() {
-        val actual = calculateBerlinClockFor(hours = 0)
+        val actualWhenZero = calculateBerlinClockFor(hours = 0)
 
-        assertEquals(0, actual.hoursSecondRowCount)
+        assertEquals(0, actualWhenZero.hoursSecondRowCount)
+
+        val actualWhenFive = calculateBerlinClockFor(hours = 5)
+
+        assertEquals(0, actualWhenFive.hoursSecondRowCount)
     }
 
     @Test
     fun `returns 3 for second row of hours when remainder of division by 5 is equal to 3`() {
-        val actual = calculateBerlinClockFor(hours = 3)
+        val actualWhenThree = calculateBerlinClockFor(hours = 3)
 
-        assertEquals(3, actual.hoursSecondRowCount)
+        assertEquals(3, actualWhenThree.hoursSecondRowCount)
+
+        val actualWhenEight = calculateBerlinClockFor(hours = 3)
+
+        assertEquals(3, actualWhenEight.hoursSecondRowCount)
     }
 
-    private fun calculateBerlinClockFor(hours: Int = 0, seconds: Int = 0): BerlinClockValues =
+    @Test
+    fun `returns 0 for first row of minutes when minutes is equal to 0`() {
+        val actual = calculateBerlinClockFor(minutes = 0)
+
+        assertEquals(0, actual.minutesFirstRowCount)
+    }
+
+    private fun calculateBerlinClockFor(hours: Int = 0, minutes: Int = 0, seconds: Int = 0) =
         BerlinClockConverter.convertToBerlinClock(
             GregorianCalendar(
                 2022,
                 1,
                 1,
                 hours,
-                0,
+                minutes,
                 seconds
             )
         )

@@ -13,7 +13,8 @@ class BerlinClockConverter {
             return BerlinClockValues(
                 secondsIndicatorOn = seconds % 2 == 0,
                 hoursFirstRowCount = hours.floorDiv(5),
-                hoursSecondRowCount = hours % 5
+                hoursSecondRowCount = hours % 5,
+                minutesFirstRowCount = 0
             )
         }
     }
