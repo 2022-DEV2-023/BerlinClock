@@ -12,7 +12,7 @@ The top lamp blinks to show seconds- it is illuminated on even seconds and off o
 
 The next two rows represent hours. The upper row represents 5 hour blocks and is made up of 4 red lamps. The lower row represents 1 hour blocks and is also made up of 4 red lamps.
 
-The next two rows represent the minutes. The upper row represents 5 minute blocks, and is made up of 11 lamps- every third lamp is red, the rest are yellow. The bottom row represents 1 minute blocks, and is made up of 4 yellow lamps.
+The next two rows represent the minutes. The upper row represents 5 minute blocks, and is made up of 11 lamps- every third lamp is yellow, the rest are red. The bottom row represents 1 minute blocks, and is made up of 4 yellow lamps.
 
 The final row shows the time in HH:MM format
 
@@ -24,7 +24,8 @@ The final row shows the time in HH:MM format
 ## Tools used:
 - Android Studio Dolphin | 2021.3.1
 - Gradle 7.4
-- 
+
+
 ## How to run this app
 - checkout the code
 
