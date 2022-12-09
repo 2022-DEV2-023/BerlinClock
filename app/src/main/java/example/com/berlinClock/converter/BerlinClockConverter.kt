@@ -6,7 +6,7 @@ import java.util.*
 
 class BerlinClockConverter {
     companion object {
-        fun convertToBerlinClock(date: GregorianCalendar): BerlinClockValues {
+        fun convertToBerlinClock(date: GregorianCalendar = GregorianCalendar()): BerlinClockValues {
             val seconds = date.get(Calendar.SECOND)
             val hours = date.get(Calendar.HOUR_OF_DAY)
             val minutes = date.get(Calendar.MINUTE)
