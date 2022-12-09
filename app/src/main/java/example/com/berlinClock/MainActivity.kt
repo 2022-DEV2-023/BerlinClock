@@ -21,13 +21,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import example.com.berlinClock.ui.theme.BerlinClockTheme
+import example.com.berlinClock.viewmodel.BerlinClockViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,74 +57,81 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
 
-    @Composable
-    private fun BerlinClock(width: Float) {
-        val defaultModifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
+@Composable
+fun BerlinClock(
+    width: Float,
+    viewModel: BerlinClockViewModel = viewModel(),
+) {
+    viewModel.startClock()
+    val uiState by viewModel.uiState.collectAsState()
 
-        val longRectangleWidth = width / 5
-        val shortRectangleWidth = width / 14
-        val rectangleHeight = 50.0f
+    val defaultModifier = Modifier
+        .fillMaxWidth()
+        .padding(8.dp)
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+    val longRectangleWidth = width / 5
+    val shortRectangleWidth = width / 14
+    val rectangleHeight = 50.0f
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = defaultModifier,
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = defaultModifier,
         ) {
-            Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = defaultModifier,
-            ) {
-                Circle()
+            Circle()
+        }
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = defaultModifier,
+        ) {
+            for (i in 1..4) {
+                Rectangle(
+                    width = longRectangleWidth,
+                    height = rectangleHeight,
+                )
             }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = defaultModifier,
-            ) {
-                for (i in 1..4) {
-                    Rectangle(
-                        width = longRectangleWidth,
-                        height = rectangleHeight,
-                    )
-                }
+        }
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = defaultModifier,
+        ) {
+            for (i in 1..4) {
+                Rectangle(
+                    width = longRectangleWidth,
+                    height = rectangleHeight
+                )
             }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = defaultModifier,
-            ) {
-                for (i in 1..4) {
-                    Rectangle(
-                        width = longRectangleWidth,
-                        height = rectangleHeight
-                    )
-                }
+        }
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = defaultModifier,
+        ) {
+            for (i in 1..11) {
+                Rectangle(
+                    width = shortRectangleWidth,
+                    height = rectangleHeight
+                )
             }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = defaultModifier,
-            ) {
-                for (i in 1..11) {
-                    Rectangle(
-                        width = shortRectangleWidth,
-                        height = rectangleHeight
-                    )
-                }
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = defaultModifier,
-            ) {
-                for (i in 1..4) {
-                    Rectangle(
-                        width = longRectangleWidth,
-                        height = rectangleHeight,
-                    )
-                }
+        }
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = defaultModifier,
+        ) {
+            for (i in 1..4) {
+                Rectangle(
+                    width = longRectangleWidth,
+                    height = rectangleHeight,
+                )
             }
         }
     }
 }
+
 
 @Composable
 fun Rectangle(width: Float, height: Float) {
@@ -136,7 +146,6 @@ fun Rectangle(width: Float, height: Float) {
 }
 
 @Composable
-@Preview(showBackground = true)
 fun Circle() {
     Box(
         modifier = Modifier
