@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,9 +28,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import example.com.berlinClock.ui.theme.BerlinClockTheme
+import example.com.berlinClock.ui.theme.digitalClockFont
 import example.com.berlinClock.viewmodel.BerlinClockViewModel
 
 class MainActivity : ComponentActivity() {
@@ -170,6 +175,17 @@ fun BerlinClock(
                     color = Color.White,
                 )
             }
+        }
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = defaultModifier.testTag("time"),
+        ) {
+            Text(
+                uiState.time,
+                fontFamily = digitalClockFont,
+                fontSize = 75.sp,
+                fontWeight = FontWeight.SemiBold
+            )
         }
     }
 }
