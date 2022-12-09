@@ -25,19 +25,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import example.com.berlinClock.ui.theme.BerlinClockTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val defaultModifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
 
         val displayMetrics = DisplayMetrics()
 
@@ -45,9 +39,6 @@ class MainActivity : ComponentActivity() {
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
         val width = displayMetrics.widthPixels / displayMetrics.density
-        val longRectangleWidth = width / 5
-        val shortRectangleWidth = width / 14
-        val rectangleHeight = 50.0f
 
         setContent {
             BerlinClockTheme {
@@ -56,61 +47,76 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = defaultModifier,
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.SpaceEvenly,
-                            modifier = defaultModifier,
-                        ) {
-                            Circle()
-                        }
-                        Row(
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            modifier = defaultModifier,
-                        ) {
-                            for (i in 1..4) {
-                                Rectangle(
-                                    width = longRectangleWidth,
-                                    height = rectangleHeight,
-                                )
-                            }
-                        }
-                        Row(
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            modifier = defaultModifier,
-                        ) {
-                            for (i in 1..4) {
-                                Rectangle(
-                                    width = longRectangleWidth,
-                                    height = rectangleHeight
-                                )
-                            }
-                        }
-                        Row(
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            modifier = defaultModifier,
-                        ) {
-                            for (i in 1..11) {
-                                Rectangle(
-                                    width = shortRectangleWidth,
-                                    height = rectangleHeight
-                                )
-                            }
-                        }
-                        Row(
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            modifier = defaultModifier,
-                        ) {
-                            for (i in 1..4) {
-                                Rectangle(
-                                    width = longRectangleWidth,
-                                    height = rectangleHeight,
-                                )
-                            }
-                        }
-                    }
+                    BerlinClock(
+                        width = width
+                    )
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun BerlinClock(width: Float) {
+        val defaultModifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+
+        val longRectangleWidth = width / 5
+        val shortRectangleWidth = width / 14
+        val rectangleHeight = 50.0f
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = defaultModifier,
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = defaultModifier,
+            ) {
+                Circle()
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = defaultModifier,
+            ) {
+                for (i in 1..4) {
+                    Rectangle(
+                        width = longRectangleWidth,
+                        height = rectangleHeight,
+                    )
+                }
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = defaultModifier,
+            ) {
+                for (i in 1..4) {
+                    Rectangle(
+                        width = longRectangleWidth,
+                        height = rectangleHeight
+                    )
+                }
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = defaultModifier,
+            ) {
+                for (i in 1..11) {
+                    Rectangle(
+                        width = shortRectangleWidth,
+                        height = rectangleHeight
+                    )
+                }
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = defaultModifier,
+            ) {
+                for (i in 1..4) {
+                    Rectangle(
+                        width = longRectangleWidth,
+                        height = rectangleHeight,
+                    )
                 }
             }
         }
