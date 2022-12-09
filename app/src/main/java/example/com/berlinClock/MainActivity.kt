@@ -1,6 +1,7 @@
 package example.com.berlinClock
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -25,8 +26,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import example.com.berlinClock.ui.theme.BerlinClockTheme
 
 class MainActivity : ComponentActivity() {
@@ -35,6 +38,16 @@ class MainActivity : ComponentActivity() {
         val defaultModifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+
+        val displayMetrics = DisplayMetrics()
+
+        @Suppress("DEPRECATION")
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+        val width = displayMetrics.widthPixels / displayMetrics.density
+        val longRectangleWidth = width / 5
+        val shortRectangleWidth = width / 14
+        val rectangleHeight = 50.0f
 
         setContent {
             BerlinClockTheme {
@@ -58,7 +71,10 @@ class MainActivity : ComponentActivity() {
                             modifier = defaultModifier,
                         ) {
                             for (i in 1..4) {
-                                Rectangle()
+                                Rectangle(
+                                    width = longRectangleWidth,
+                                    height = rectangleHeight,
+                                )
                             }
                         }
                         Row(
@@ -66,7 +82,10 @@ class MainActivity : ComponentActivity() {
                             modifier = defaultModifier,
                         ) {
                             for (i in 1..4) {
-                                Rectangle()
+                                Rectangle(
+                                    width = longRectangleWidth,
+                                    height = rectangleHeight
+                                )
                             }
                         }
                         Row(
@@ -74,7 +93,10 @@ class MainActivity : ComponentActivity() {
                             modifier = defaultModifier,
                         ) {
                             for (i in 1..11) {
-                                Rectangle()
+                                Rectangle(
+                                    width = shortRectangleWidth,
+                                    height = rectangleHeight
+                                )
                             }
                         }
                         Row(
@@ -82,7 +104,10 @@ class MainActivity : ComponentActivity() {
                             modifier = defaultModifier,
                         ) {
                             for (i in 1..4) {
-                                Rectangle()
+                                Rectangle(
+                                    width = longRectangleWidth,
+                                    height = rectangleHeight,
+                                )
                             }
                         }
                     }
@@ -93,12 +118,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-@Preview(showBackground = true)
-fun Rectangle() {
+fun Rectangle(width: Float, height: Float) {
     Box(
         modifier = Modifier
-            .width(50.dp)
-            .height(25.dp)
+            .width(width.dp)
+            .height(height.dp)
             .clip(RoundedCornerShape(10.dp))
             .border(2.dp, Color.Black, RoundedCornerShape(10.dp))
             .background(Color.Red)
