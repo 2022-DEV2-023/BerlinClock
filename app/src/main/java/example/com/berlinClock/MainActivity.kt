@@ -66,7 +66,6 @@ fun BerlinClock(
 ) {
     viewModel.startClock()
     val uiState by viewModel.uiState.collectAsState()
-
     val defaultModifier = Modifier
         .fillMaxWidth()
         .padding(8.dp)
@@ -83,27 +82,30 @@ fun BerlinClock(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = defaultModifier,
         ) {
-            Circle()
+            Circle(
+                color = if (uiState.secondsIndicatorOn) {
+                    Color.Red
+                } else {
+                    Color.White
+                }
+            )
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = defaultModifier,
         ) {
-            for (i in 1..4) {
+            for (i in 1..uiState.hoursFirstRowCount) {
                 Rectangle(
                     width = longRectangleWidth,
                     height = rectangleHeight,
+                    color = Color.Red
                 )
             }
-        }
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = defaultModifier,
-        ) {
-            for (i in 1..4) {
+            for (i in (uiState.hoursFirstRowCount + 1)..4) {
                 Rectangle(
                     width = longRectangleWidth,
-                    height = rectangleHeight
+                    height = rectangleHeight,
+                    color = Color.White
                 )
             }
         }
@@ -111,10 +113,42 @@ fun BerlinClock(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = defaultModifier,
         ) {
-            for (i in 1..11) {
+            for (i in 1..uiState.hoursSecondRowCount) {
+                Rectangle(
+                    width = longRectangleWidth,
+                    height = rectangleHeight,
+                    color = Color.Red
+                )
+            }
+            for (i in (uiState.hoursSecondRowCount + 1)..4) {
+                Rectangle(
+                    width = longRectangleWidth,
+                    height = rectangleHeight,
+                    color = Color.White
+                )
+            }
+        }
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = defaultModifier,
+        ) {
+            for (i in 1..uiState.minutesFirstRowCount) {
                 Rectangle(
                     width = shortRectangleWidth,
-                    height = rectangleHeight
+                    height = rectangleHeight,
+                    color = if (i % 3 == 0) {
+                        Color.Yellow
+                    } else {
+                        Color.Red
+                    }
+                )
+            }
+
+            for (i in (uiState.minutesFirstRowCount + 1)..11) {
+                Rectangle(
+                    width = shortRectangleWidth,
+                    height = rectangleHeight,
+                    color = Color.White,
                 )
             }
         }
@@ -122,36 +156,43 @@ fun BerlinClock(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = defaultModifier,
         ) {
-            for (i in 1..4) {
+            for (i in 1..uiState.minutesSecondRowCount) {
                 Rectangle(
                     width = longRectangleWidth,
                     height = rectangleHeight,
+                    color = Color.Red,
+                )
+            }
+            for (i in (uiState.minutesSecondRowCount + 1)..4) {
+                Rectangle(
+                    width = longRectangleWidth,
+                    height = rectangleHeight,
+                    color = Color.White,
                 )
             }
         }
     }
 }
 
-
 @Composable
-fun Rectangle(width: Float, height: Float) {
+fun Rectangle(width: Float, height: Float, color: Color) {
     Box(
         modifier = Modifier
             .width(width.dp)
             .height(height.dp)
             .clip(RoundedCornerShape(10.dp))
             .border(2.dp, Color.Black, RoundedCornerShape(10.dp))
-            .background(Color.Red)
+            .background(color)
     )
 }
 
 @Composable
-fun Circle() {
+fun Circle(color: Color) {
     Box(
         modifier = Modifier
             .size(100.dp)
             .clip(CircleShape)
             .border(2.dp, Color.Black, CircleShape)
-            .background(Color.Red)
+            .background(color)
     )
 }
